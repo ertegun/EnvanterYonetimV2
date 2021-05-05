@@ -142,6 +142,7 @@
 }
 @media (max-width: 991.98px) {
   .login.login-3 .login-aside .aside-img {
+      display: none!important;
     min-height: 500px !important;
     background-size: 500px;
   }

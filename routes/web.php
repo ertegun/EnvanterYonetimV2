@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [PagesController::class, 'index']);
-
+Route::get('/giris', [PagesController::class, 'login']);
 
 // Demo routes
 Route::get('/datatables', [PagesController::class, 'datatables']);
