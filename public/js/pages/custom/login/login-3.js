@@ -18,10 +18,10 @@ var KTLogin = function() {
 		        form,
 		        {
 		            fields: {
-						email: {
+						user_name: {
 							validators: {
 								notEmpty: {
-									message: 'Email gerekli'
+									message: 'Kullanıcı Adı gerekli'
 								}
 							}
 						},
@@ -466,4 +466,15 @@ var KTLogin = function() {
 // Class Initialization
 jQuery(document).ready(function() {
     KTLogin.init();
+});
+
+$('#forgot_button').on('click',function (e) {
+    $('#signin_form').addClass('d-none');
+    $('#forgot_form').removeClass('d-none');
+    $('#forgot_email').focus();
+});
+$('#forgot_cancel_button').on('click',function (e) {
+    $('#forgot_form').addClass('d-none');
+    $('#signin_form').removeClass('d-none');
+    $('#signin_user_name').focus();
 });

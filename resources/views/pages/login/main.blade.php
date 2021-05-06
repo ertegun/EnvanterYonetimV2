@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="tr">
 	<!--begin::Head-->
-	<head><base href="../../../../">
+	<head>
 		<meta charset="utf-8" />
 		<title>Giriş Yap | Envanter Yönetim</title>
 		<meta name="description" content="Giriş Yap" />
@@ -24,8 +24,9 @@
 		<link href="{{asset('css/themes/layout/header/menu/light.css')}}" rel="stylesheet" type="text/css" />
 		<link href="{{asset('css/themes/layout/brand/dark.css')}}" rel="stylesheet" type="text/css" />
 		<link href="{{asset('css/themes/layout/aside/dark.css')}}" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 		<!--end::Layout Themes-->
-		<link rel="shortcut icon" href="{{asset('media/logos/e_trans.png')}}" />
+		<link rel="shortcut icon" href="{{asset('media/logos/main_dark.png')}}" />
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
@@ -39,8 +40,8 @@
 					<!--begin::Aside Top-->
 					<div class="d-flex flex-column-auto flex-column">
 						<!--begin::Aside header-->
-						<a href="http://www.gruparge.com" class="login-logo text-center pt-10 pb-10">
-							<img src="{{asset('media/logos/arge_trans.png')}}" class="max-h-70px" alt="" />
+						<a href="{{env('COMPANY_WEB_SITE')}}" class="login-logo text-center pt-10 pb-10">
+							<img src="{{asset('media/logos/company.png')}}" class="max-h-70px" alt="" />
 						</a>
 						<!--end::Aside header-->
 						<!--begin::Aside Title-->
@@ -60,7 +61,7 @@
 					<!--begin::Wrapper-->
 					<div class="d-flex flex-row-fluid flex-center">
 						<!--begin::Signin-->
-						<div class="login-form">
+						<div id="signin_form" class="animate__animated animate__backInDown login-form">
 							<!--begin::Form-->
 							<form class="form" id="kt_login_singin_form" action="">
 								<!--begin::Title-->
@@ -70,32 +71,57 @@
 								<!--begin::Title-->
 								<!--begin::Form group-->
 								<div class="form-group">
-									<label class="font-size-h6 font-weight-bolder text-dark">Email</label>
-									<input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="text" name="email" autocomplete="off" autofocus/>
+									<label class="font-size-h6 font-weight-bolder text-dark">Kullanıcı Adı</label>
+									<input id="signin_user_name" class="form-control h-auto py-7 px-6 rounded-lg border-1" type="text" name="user_name" autocomplete="off" autofocus/>
 								</div>
 								<!--end::Form group-->
 								<!--begin::Form group-->
 								<div class="form-group">
 									<div class="d-flex justify-content-between mt-n5">
 										<label class="font-size-h6 font-weight-bolder text-dark pt-5">Şifre</label>
-										<a href="custom/pages/login/login-3/forgot.html" class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5">Şifremi Unuttum</a>
+										<a id="forgot_button" role="button" class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5">Şifremi Unuttum</a>
 									</div>
-									<input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="password" name="password" autocomplete="off" />
+									<input class="form-control h-auto py-7 px-6 rounded-lg border-1" type="password" name="password" autocomplete="off" />
 								</div>
 								<!--end::Form group-->
 								<!--begin::Action-->
 								<div class="pb-lg-0 pb-5">
 									<button type="submit" id="kt_login_singin_form_submit_button" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Giriş Yap</button>
 								</div>
-                                <h3 class="font-weight-bolder text-center font-size-h4 text-dark-50 line-height-xl pt-10">
-                                    Grup Arge {{date('Y')}} &copy;
-                                </h3>
 								<!--end::Action-->
 							</form>
 							<!--end::Form-->
 						</div>
 						<!--end::Signin-->
+                        <!--begin::Forgot-->
+						<div id="forgot_form" class="animate__animated animate__backInDown login-form d-none">
+							<!--begin::Form-->
+							<form class="form" id="kt_login_forgot_form" action="">
+								<!--begin::Title-->
+								<div class="pb-5 pb-lg-15">
+									<h3 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Şifremi Unuttum</h3>
+									<p class="text-muted font-weight-bold font-size-h4">Lütfen Sisteme Kayıtlı Olan Email Adresinizi Giriniz</p>
+								</div>
+								<!--end::Title-->
+								<!--begin::Form group-->
+								<div class="form-group">
+									<input id="forgot_email" class="form-control h-auto py-7 px-6 border-1 rounded-lg font-size-h6" type="email" placeholder="taha.yerlikaya{{env('COMPANY_MAIL_APPEND')}}" name="email" autocomplete="off" />
+								</div>
+								<!--end::Form group-->
+								<!--begin::Form group-->
+								<div class="form-group d-flex flex-wrap">
+									<button type="submit" id="kt_login_forgot_form_submit_button" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4">Gönder</button>
+									<a id="forgot_cancel_button" class="btn btn-light-primary font-weight-bolder font-size-h6 px-8 py-4 my-3">Vazgeç</a>
+								</div>
+								<!--end::Form group-->
+							</form>
+							<!--end::Form-->
+						</div>
+						<!--end::Forgot-->
 					</div>
+                    <h3 class="font-weight-bolder text-center font-size-h4 text-dark-50 line-height-xl pt-10">
+                        {{env('COMPANY_NAME').' '.date('Y')}} &copy;
+                    </h3>
 					<!--end::Wrapper-->
 				</div>
 				<!--end::Content-->
