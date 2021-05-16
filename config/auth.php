@@ -41,6 +41,11 @@ return [
             'provider' => 'users',
         ],
 
+        'super_admins' => [
+            'driver' => 'session',
+            'provider' => 'super_admins',
+        ],
+
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -71,6 +76,11 @@ return [
             'model' => App\Models\User::class,
         ],
 
+        'super_admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\SuperAdmin::class,
+        ],
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -95,6 +105,12 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'super_admins' => [
+            'provider' => 'super_admins',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

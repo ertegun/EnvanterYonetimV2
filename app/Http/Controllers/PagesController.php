@@ -11,6 +11,8 @@ class PagesController extends Controller
         return view('pages.login.main');
     }
 
+
+
     public function index()
     {
         $page_title = 'Dashboard';

@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\SuperAdminController;
+use App\Http\Middleware\SuperAdminAuth;
+use App\Http\Middleware\SuperAdminLogin;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +17,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [PagesController::class, 'index']);
-Route::get('/giris', [PagesController::class, 'login']);
+Route::get('/', [PagesController::class, 'index'])->name('home');
+Route::get('/giris', [PagesController::class, 'login'])->name('login');
+
+//Super Admin
+    Route::prefix('admin')->name('admin_')->group(function () {
+        //Giriş Yap
+        Route::get('', [SuperAdminController::class, 'login'])->middleware(SuperAdminLogin::class)->name('login');
+        //Giriş Kontrol
+        Route::post('/giris',[SuperAdminController::class,'login_check'])->name('login_check');
+        //Çıkış Yap
+        Route::get('/cikis',[SuperAdminController::class,'logout'])->name('logout');
+        //Şifre Sıfırla
+        Route::get('/sifre_sifirla/{token}',[SuperAdminController::class,'forgot'])->name('forgot');
+        //Şifre Sıfırlama Mail Gönderme
+        Route::post('/sifre_sifirla_mail',[SuperAdminController::class,'forgot_mail'])->name('forgot_mail');
+        //İşlemler
+        Route::middleware(SuperAdminAuth::class)->group(function () {
+            //Ana Sayfa
+            Route::get('/anasayfa', [SuperAdminController::class, 'home'])->name('home');
+        });
+    });
+//Super Admin
 
 // Demo routes
 Route::get('/datatables', [PagesController::class, 'datatables']);

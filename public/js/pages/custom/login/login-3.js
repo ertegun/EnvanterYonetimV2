@@ -54,36 +54,30 @@ var KTLogin = function() {
 				}, 2000);
 
 				// Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
-				/**
+
 		        FormValidation.utils.fetch(formSubmitUrl, {
 		            method: 'POST',
 					dataType: 'json',
+                    credentials: "same-origin",
+                    headers:{
+                        "X-CSRF-TOKEN": form.querySelector('[name="_token"]').value,
+                    },
 		            params: {
-		                name: form.querySelector('[name="username"]').value,
-		                email: form.querySelector('[name="password"]').value,
+		                user_name: form.querySelector('[name="user_name"]').value,
+		                password: form.querySelector('[name="password"]').value,
 		            },
 		        }).then(function(response) { // Return valid JSON
 					// Release button
 					KTUtil.btnRelease(formSubmitButton);
 
 					if (response && typeof response === 'object' && response.status && response.status == 'success') {
-						Swal.fire({
-			                text: "All is cool! Now you submit this form",
-			                icon: "success",
-			                buttonsStyling: false,
-							confirmButtonText: "Ok, got it!",
-							customClass: {
-								confirmButton: "btn font-weight-bold btn-light-primary"
-							}
-			            }).then(function() {
-							KTUtil.scrollTop();
-						});
+						window.location.href = super_admin_home_url;
 					} else {
 						Swal.fire({
-			                text: "Sorry, something went wrong, please try again.",
+			                text: "Kullanıcı Adı veya Şifre Hatalı!",
 			                icon: "error",
 			                buttonsStyling: false,
-							confirmButtonText: "Ok, got it!",
+							confirmButtonText: "Tamam",
 							customClass: {
 								confirmButton: "btn font-weight-bold btn-light-primary"
 							}
@@ -92,7 +86,6 @@ var KTLogin = function() {
 						});
 					}
 		        });
-				**/
 		    })
 			.on('core.form.invalid', function() {
 				Swal.fire({
@@ -148,6 +141,23 @@ var KTLogin = function() {
 		    .on('core.form.valid', function() {
 				// Show loading state on button
 				KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Bekleyin");
+
+                Swal.fire({
+                    text: "Email Adresinize Şifremi Unuttum Maili Gönderilecektir. Onaylıyor musunuz?",
+                    icon: "success",
+                    showCancelButton: true,
+                    buttonsStyling: false,
+                    confirmButtonText: "Evet",
+                    cancelButtonText: "Vazgeç",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-primary",
+                        cancelButton: "btn font-weight-bold btn-default"
+                    }
+                }).then(function (result) {
+                    if (result.value) {
+                        form.submit(); // Submit form
+                    }
+                });
 
 				// Simulate Ajax request
 				setTimeout(function() {
