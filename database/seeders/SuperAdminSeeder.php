@@ -16,6 +16,8 @@ class SuperAdminSeeder extends Seeder
     {
         SuperAdmin::insert([
             'user_name' => 'admin',
+            'email' => 'taha.yerlikaya@gruparge.com',
+            'name' => 'Taha Yerlikaya',
             'password' => bcrypt('admin')
         ]);
     }

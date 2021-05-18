@@ -71,7 +71,7 @@ var KTLogin = function() {
 					KTUtil.btnRelease(formSubmitButton);
 
 					if (response && typeof response === 'object' && response.status && response.status == 'success') {
-						window.location.href = super_admin_home_url;
+						window.location.href = home_url;
 					} else {
 						Swal.fire({
 			                text: "Kullanıcı Adı veya Şifre Hatalı!",

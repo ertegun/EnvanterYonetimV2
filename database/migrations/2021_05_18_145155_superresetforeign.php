@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSuperAdminsTable extends Migration
+class Superresetforeign extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateSuperAdminsTable extends Migration
      */
     public function up()
     {
-        Schema::create('super_admins', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email');
-            $table->string('user_name')->unique();
-            $table->string('password');
+        Schema::table('super_reset_password', function (Blueprint $table) {
+            $table->foreign('admin_id')->references('id')->on('super_admins');
         });
     }
 
@@ -29,6 +25,8 @@ class CreateSuperAdminsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('super_admins');
+        Schema::table('super_reset_password', function (Blueprint $table) {
+            $table->dropForeign(['admin_id']);
+        });
     }
 }

@@ -8,12 +8,18 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Str;
+use stdClass;
 
 class SuperAdminController extends Controller
 {
     //Admin Giriş
     public function login(){
-        return view('pages.admin.login');
+        $data = new stdClass;
+        $data->title = ' Yetkili Girişi';
+        $data->check_url = route('admin_login_check');
+        $data->forgot_url = route('admin_forgot_mail');
+        $data->home_url = route('admin_home');
+        return view('pages.admin.login',compact('data'));
     }
     //Admin Giriş Kontrol
     public function login_check(Request $request){
