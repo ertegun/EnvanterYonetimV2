@@ -9,6 +9,8 @@ class SuperResetPassword extends Model
 {
     use HasFactory;
 
+    protected $table = "super_reset_password";
+
     public function adminInfo (){
         return $this->hasOne(SuperAdmin::class , 'id' ,'admin_id');
     }

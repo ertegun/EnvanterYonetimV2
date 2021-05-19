@@ -2,20 +2,12 @@
 
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\SuperAdminController;
+use App\Http\Middleware\CheckSuperAdminEmail;
+use App\Http\Middleware\CheckSuperAdminToken;
 use App\Http\Middleware\SuperAdminAuth;
 use App\Http\Middleware\SuperAdminLogin;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', [PagesController::class, 'index'])->name('home');
 Route::get('/giris', [PagesController::class, 'login'])->name('login');
@@ -28,10 +20,12 @@ Route::get('/giris', [PagesController::class, 'login'])->name('login');
         Route::post('/giris',[SuperAdminController::class,'login_check'])->name('login_check');
         //Çıkış Yap
         Route::get('/cikis',[SuperAdminController::class,'logout'])->name('logout');
-        //Şifre Sıfırla
-        Route::get('/sifre_sifirla/{token}',[SuperAdminController::class,'forgot'])->name('forgot');
+        //Şifre Sıfırla Sayfası
+        Route::get('/sifre_sifirla/{token}',[SuperAdminController::class,'forgot'])->middleware(CheckSuperAdminToken::class)->name('forgot');
         //Şifre Sıfırlama Mail Gönderme
-        Route::post('/sifre_sifirla_mail',[SuperAdminController::class,'forgot_mail'])->name('forgot_mail');
+        Route::post('/sifre_sifirla_mail',[SuperAdminController::class,'forgot_mail'])->middleware(CheckSuperAdminEmail::class)->name('forgot_mail');
+        //Şifre Sıfırlama
+        Route::post('/sifre_sifirla/onay',[SuperAdminController::class,'reset_password'])->middleware(CheckSuperAdminToken::class)->name('reset_password');
         //İşlemler
         Route::middleware(SuperAdminAuth::class)->group(function () {
             //Ana Sayfa

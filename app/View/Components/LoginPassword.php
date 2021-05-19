@@ -1,0 +1,34 @@
+<?php
+
+namespace App\View\Components;
+
+use Illuminate\View\Component;
+
+class LoginPassword extends Component
+{
+    /**
+     * Create a new component instance.
+     *
+     * @return void
+     */
+
+     public $reset;
+     public $name;
+     public $token;
+    public function __construct($reset,$name,$token)
+    {
+        $this->reset = $reset;
+        $this->name = $name;
+        $this->token = $token;
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     *
+     * @return \Illuminate\Contracts\View\View|\Closure|string
+     */
+    public function render()
+    {
+        return view('components.login-password');
+    }
+}
