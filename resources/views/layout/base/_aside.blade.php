@@ -1,5 +1,3 @@
-{{-- Aside --}}
-
 @php
     $kt_logo_image = 'logo-light.png';
 @endphp
@@ -12,7 +10,6 @@
 
 <div class="aside aside-left {{ Metronic::printClasses('aside', false) }} d-flex flex-column flex-row-auto" id="kt_aside">
 
-    {{-- Brand --}}
     <div class="brand flex-column-auto {{ Metronic::printClasses('brand', false) }}" id="kt_brand">
         <div class="brand-logo">
             <a href="{{ url('/') }}">
@@ -28,7 +25,6 @@
 
     </div>
 
-    {{-- Aside menu --}}
     <div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
 
         @if (config('layout.aside.self.display') === false)

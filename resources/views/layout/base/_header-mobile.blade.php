@@ -1,4 +1,3 @@
-{{-- Header Mobile --}}
 <div id="kt_header_mobile" class="header-mobile {{ Metronic::printClasses('header-mobile', false) }}" {{ Metronic::printAttrs('header-mobile') }}>
     <div class="mobile-logo">
         <a href="{{ url('/') }}">

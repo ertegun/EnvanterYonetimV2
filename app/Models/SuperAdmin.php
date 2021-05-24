@@ -10,8 +10,4 @@ class SuperAdmin extends Authendicatable
     use HasFactory;
     public $timestamps = false;
 
-    protected $fillable = [
-        'user_name',
-        'email'
-    ];
 }

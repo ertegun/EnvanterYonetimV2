@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Envanter Yönetim | {{$data->title ?? "Sayfa Bulunamadı"}}</title>
-		<meta name="description" content="Admin" />
+        <meta name="description" content="{{$data->description ?? "Sayfa Bulunamadı"}}"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<link rel="stylesheet" href="{{asset('css/pages/login/fonts.css')}}" />
 		<link href="{{asset('css/pages/login/login-3.css')}}" rel="stylesheet" type="text/css" />
